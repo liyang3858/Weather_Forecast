@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for AreaForecast project
+# Scrapy settings for ProvinceForecast project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,25 +9,29 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'AreaForecast'
+import helper
 
-SPIDER_MODULES = ['AreaForecast.spiders']
-NEWSPIDER_MODULE = 'AreaForecast.spiders'
+BOT_NAME = '神马'
+LOG_LEVEL = 'WARNING'
+LOG_ENABLED = True
 
+SPIDER_MODULES = ['ProvinceForecast.spiders']
+NEWSPIDER_MODULE = 'ProvinceForecast.spiders'
 
-# start MySQL database configure setting
-MYSQL_HOST = 'rdsvy5g7kci8vffh3fdlo.mysql.rds.aliyuncs.com'
-MYSQL_DBNAME = 'monitordata'
-MYSQL_USER = 'tsinghua'
-MYSQL_PASSWD = '6haSWUju'
-port = 3888 
-# end of MySQL database configure setting
+ITEM_PIPELINES = {
+	'ProvinceForecast.pipelines.ProvinceforecastPipeline':100,
+}
+
+DOWNLOAD_DELAY = 1.2
+DOWNLOAD_TIMEOUT = 400
+USER_AGENT = "YisouSpider"
+
+if helper.get_pc_name() not in helper.ali_server:
+    del(LOG_LEVEL)
+    pass
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'AreaForecast (+http://www.yourdomain.com)'
-
-# Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+#USER_AGENT = 'ProvinceForecast (+http://www.yourdomain.com)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS=32
@@ -55,13 +59,13 @@ ROBOTSTXT_OBEY = False
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'AreaForecast.middlewares.MyCustomSpiderMiddleware': 543,
+#    'ProvinceForecast.middlewares.MyCustomSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'AreaForecast.middlewares.MyCustomDownloaderMiddleware': 543,
+#    'ProvinceForecast.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -72,9 +76,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'AreaForecast.pipelines.SomePipeline': 300,
-}
+#ITEM_PIPELINES = {
+#    'ProvinceForecast.pipelines.SomePipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
