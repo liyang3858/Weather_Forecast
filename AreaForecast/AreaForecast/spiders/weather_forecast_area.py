@@ -10,9 +10,6 @@ from AreaForecast.helper import *
 import sys
 import re
 import platform
-#import math
-#import datetime
-#from datetime import timedelta
 import time
 import json
 
